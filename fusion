@@ -1,0 +1,9 @@
+sudo apt-get install cifs-utils samba rclone
+sudo mkdir NAS
+sudo echo "//192.168.178.1/fritz.nas/Schatztruhe /home/pi/NAS cifs user=Schmallex,pass=LesbosWurst1708,noserverino 0 0" >> /etc/fstab
+sudo mount -a
+#rclone einrichten: https://itv4.de/486-rclone-verbindung-zu-google-drive-aufbauen-per-shell
+sudo mkdir -p /root/.config/rclone
+sudo cp ./config/rclone/rclone.conf /root/.config/rclone/rclone.conf
+read -p "When you finished the configuration type 'next': " input
+if [[ "$input" == next ]] && sudo rclone snyc gdrive: NAS/Schmallex/GDS
